@@ -1,2 +1,3 @@
 from .user_serializer import UserSerializer
 from .idea_serializer import IdeaSerializer
+from .workshop_serializer import WorkshopSerializer
