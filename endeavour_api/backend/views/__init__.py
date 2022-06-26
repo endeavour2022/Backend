@@ -6,3 +6,6 @@ from .create_idea import CreateIdea
 from .create_workshop import CreateWorkshop
 from .get_all_ideas import GetAllIdeas
 from .get_all_workshops import GetAllWorkshops
+from .approve_idea import ApprovePost
+from .post_message import PostMessage
+from .get_messages import GetMessage

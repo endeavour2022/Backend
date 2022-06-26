@@ -19,7 +19,7 @@ class LoginUser(APIView):
                     user = UserSerializer(user)
                     return Response({"user": user.data, "authenticated": True})
                 return Response({"alert": "Your Account is not verified, please verify your mail", "authenticated": False})
-            return Response({"alert": "Provide valid username and password", "authenticated": True})
+            return Response({"alert": "Provide valid username and password", "authenticated": False})
         
         elif email and password:
             if User.objects.filter(email=email, password=password).exists():
@@ -28,7 +28,7 @@ class LoginUser(APIView):
                     user = UserSerializer(user)
                     return Response({"user": user.data, "authenticated": True})
                 return Response({"alert": "Your Account is not verified, please verify your mail", "authenticated": False})
-            return Response({"alert": "Provide valid email and password", "authenticated": True})
+            return Response({"alert": "Provide valid email and password", "authenticated": False})
         else:
             return Response({"alert": "Provide valid username and password", "authenticated": False})        
    

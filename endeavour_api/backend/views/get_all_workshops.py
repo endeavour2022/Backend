@@ -16,8 +16,6 @@ class GetAllWorkshops(APIView):
         if not authenticated:
             return Response({"alert": "youre not allowed to open this page"})
         all_workshops = Workshop.objects.filter(status='active')
-
-        import pdb
-        pdb.set_trace()    
+ 
         result = WorkshopSerializer(all_workshops, many=True)
         return Response({"result": result.data}, status=status.HTTP_200_OK)

@@ -15,8 +15,8 @@ class Idea(models.Model):
     start_date = models.DateField(auto_now_add=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending", null=True, blank=True)
-    clicks = models.IntegerField(blank=True, null=True, default=1)
-    impressions = models.IntegerField(blank=True, null=True, default=1)
+    likes = models.IntegerField(blank=True, null=True, default=1)
+    approved_by = models.CharField(max_length=100,blank=True, null=True)
     
     def __str__(self):
         return self.title

@@ -9,7 +9,7 @@ import sib_api_v3_sdk
 from dotenv import load_dotenv
 from sib_api_v3_sdk.rest import ApiException
 
-API_KEY = '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'
+API_KEY = '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'
 
     
 class SendMail(APIView):

@@ -1,6 +1,6 @@
 import json
 import random
-from requests import request
+from requests import delete, request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from backend.models import Idea
@@ -31,8 +31,7 @@ class CreateIdea(APIView):
         documents = data.get("documents", "")
         start_date = data.get("start_date", "")
         status = data.get("status", "pending")
-        clicks = data.get("clicks", 1)
-        impressions = data.get("impressions", 1)
+        likes = 2
         creator = User.objects.get(username=data["username"])
         
         idea = Idea.objects.create(title=title,
@@ -43,9 +42,22 @@ class CreateIdea(APIView):
                             video=video,
                             start_date=start_date,
                             status=status,
-                            clicks=clicks,
-                            impressions=impressions,
-                            creator=creator)
+                            creator=creator,
+                            likes=likes)
         
         idea = idea.save()
         return idea, True
+    
+    def delete(self, request):
+        
+        idea_id = request.data.get("id", None)
+        
+        if not idea_id:
+            return Response({"error": "provide an id"})
+        try:
+            idea = Idea.objects.get(id=idea_id)
+            idea.delete()
+        except:
+            return Response({"error": "No idea exist with given id"})
+        
+        return Response({"result": "Idea deleted successfully"})

@@ -17,7 +17,7 @@ class UpdateUser(APIView):
         
         username = data.get("username", "")
         password = data.get("password", "")
-        is_authenticated = data.get("is_authenticated", False)
+        is_authenticated = data.get("isAuthenticated", False)
         
         if not is_authenticated:
             return ({"error": "You dont have access to perform this task"}), False

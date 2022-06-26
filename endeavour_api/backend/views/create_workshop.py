@@ -27,7 +27,7 @@ class CreateWorkshop(APIView):
         about = data.get("about", "")
         charges = data.get("charges", 10)
         date = data.get("date", "")
-        status = data.get("status", "pending")
+        status = data.get("status", "active")
         mentor = User.objects.get(username=data["username"])
         picture = data.get("picture", "")
         
@@ -42,3 +42,17 @@ class CreateWorkshop(APIView):
         
         workshop = workshop.save()
         return workshop, True
+    
+    def delete(self, request):
+        
+        workshop_id = request.data.get("id", None)
+        
+        if not workshop_id:
+            return Response({"error": "provide an id"})
+        try:
+            workshop = Workshop.objects.get(id=workshop_id)
+            workshop.delete()
+        except:
+            return Response({"error": "No idea exist with given id"})
+        
+        return Response({"result": "Idea deleted successfully"})
